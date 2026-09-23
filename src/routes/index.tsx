@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 
 import heroImage from "@/assets/dayton-truck-repair-hero.jpg";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const siteUrl = "https://daytontruckrepairs.com/";
 const googleBusinessUrl =
@@ -133,11 +133,14 @@ function Index() {
             <a href="#services" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Services</a>
             <a href="#why-us" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Why us</a>
             <a href="#contact" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Contact</a>
-            <Button asChild size="lg">
-              <a href={googleBusinessUrl} target="_blank" rel="noreferrer">
-                Find us on Google <ArrowRight />
-              </a>
-            </Button>
+            <a
+              className={buttonVariants({ size: "lg" })}
+              href={googleBusinessUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Find us on Google <ArrowRight />
+            </a>
           </nav>
           <Button
             variant="ghost"
@@ -185,14 +188,12 @@ function Index() {
               Straight answers. Solid work. Less downtime.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="h-14 px-7 text-base font-bold">
-                <a href={googleBusinessUrl} target="_blank" rel="noreferrer">
-                  View Google Business Profile <ArrowRight />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="h-14 border-surface-strong-foreground/30 bg-surface-strong/40 px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground">
-                <a href="#services">Explore services</a>
-              </Button>
+              <a className={buttonVariants({ size: "lg", className: "h-14 px-7 text-base font-bold" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
+                View Google Business Profile <ArrowRight />
+              </a>
+              <a className={buttonVariants({ variant: "outline", size: "lg", className: "h-14 border-surface-strong-foreground/30 bg-surface-strong/40 px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground" })} href="#services">
+                Explore services
+              </a>
             </div>
           </div>
         </div>
@@ -266,9 +267,9 @@ function Index() {
             <p className="text-sm font-extrabold uppercase text-accent-foreground/65">Need truck or trailer repair?</p>
             <h2 className="mt-2 text-5xl font-extrabold uppercase leading-none text-accent-foreground sm:text-6xl">Let’s get you moving.</h2>
           </div>
-          <Button asChild size="lg" className="h-14 bg-surface-strong px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong/90">
-            <a href={googleBusinessUrl} target="_blank" rel="noreferrer">Contact us on Google <ArrowRight /></a>
-          </Button>
+          <a className={buttonVariants({ size: "lg", className: "h-14 bg-surface-strong px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong/90" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
+            Contact us on Google <ArrowRight />
+          </a>
         </div>
       </section>
 
