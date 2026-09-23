@@ -6,6 +6,7 @@ import {
   Clock3,
   MapPin,
   Menu,
+  Phone,
   ShieldCheck,
   Truck,
   Wrench,
@@ -18,8 +19,9 @@ import heroImage from "@/assets/dayton-truck-repair-hero.jpg";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 const siteUrl = "https://daytontruckrepairs.com/";
-const googleBusinessUrl =
-  "https://www.google.com/maps/search/?api=1&query=Dayton+Truck+%26+Trailer+Repair+LLC";
+const googleBusinessUrl = "https://maps.app.goo.gl/p344iVU7Mk7Krrtx7";
+const phoneNumber = "(904) 240-7895";
+const phoneHref = "tel:+19042407895";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +62,9 @@ export const Route = createFileRoute("/")({
           "@type": "AutoRepair",
           name: "Dayton Truck & Trailer Repair LLC",
           url: siteUrl,
+          telephone: "+1-904-240-7895",
+          sameAs: [googleBusinessUrl],
+          hasMap: googleBusinessUrl,
           description:
             "Truck and trailer repair serving commercial drivers and fleets in Dayton, Ohio.",
           areaServed: {
@@ -133,6 +138,12 @@ function Index() {
             <a href="#services" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Services</a>
             <a href="#why-us" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Why us</a>
             <a href="#contact" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Contact</a>
+            <a
+              href={phoneHref}
+              className="flex items-center gap-2 text-sm font-bold text-surface-strong-foreground transition-colors hover:text-accent"
+            >
+              <Phone className="size-4 text-accent" /> {phoneNumber}
+            </a>
             <a
               className={buttonVariants({ size: "lg" })}
               href={googleBusinessUrl}
