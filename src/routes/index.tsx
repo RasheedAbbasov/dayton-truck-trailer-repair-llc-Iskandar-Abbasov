@@ -6,6 +6,7 @@ import {
   Clock3,
   MapPin,
   Menu,
+  Phone,
   ShieldCheck,
   Truck,
   Wrench,
@@ -18,8 +19,9 @@ import heroImage from "@/assets/dayton-truck-repair-hero.jpg";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 const siteUrl = "https://daytontruckrepairs.com/";
-const googleBusinessUrl =
-  "https://www.google.com/maps/search/?api=1&query=Dayton+Truck+%26+Trailer+Repair+LLC";
+const googleBusinessUrl = "https://maps.app.goo.gl/p344iVU7Mk7Krrtx7";
+const phoneNumber = "(904) 240-7895";
+const phoneHref = "tel:+19042407895";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -60,6 +62,9 @@ export const Route = createFileRoute("/")({
           "@type": "AutoRepair",
           name: "Dayton Truck & Trailer Repair LLC",
           url: siteUrl,
+          telephone: "+1-904-240-7895",
+          sameAs: [googleBusinessUrl],
+          hasMap: googleBusinessUrl,
           description:
             "Truck and trailer repair serving commercial drivers and fleets in Dayton, Ohio.",
           areaServed: {
@@ -125,7 +130,7 @@ function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <main id="top" className="min-h-screen bg-background">
+    <main id="top" className="min-h-screen bg-background pb-20 lg:pb-0">
       <header className="absolute inset-x-0 top-0 z-30 border-b border-surface-strong-foreground/15 bg-surface-strong/90 backdrop-blur-md">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
           <Brand />
@@ -133,6 +138,12 @@ function Index() {
             <a href="#services" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Services</a>
             <a href="#why-us" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Why us</a>
             <a href="#contact" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Contact</a>
+            <a
+              href={phoneHref}
+              className="flex items-center gap-2 text-sm font-bold text-surface-strong-foreground transition-colors hover:text-accent"
+            >
+              <Phone className="size-4 text-accent" /> {phoneNumber}
+            </a>
             <a
               className={buttonVariants({ size: "lg" })}
               href={googleBusinessUrl}
@@ -188,11 +199,11 @@ function Index() {
               Straight answers. Solid work. Less downtime.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a className={buttonVariants({ size: "lg", className: "h-14 px-7 text-base font-bold" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
-                View Google Business Profile <ArrowRight />
+              <a className={buttonVariants({ size: "lg", className: "h-14 px-7 text-base font-bold" })} href={phoneHref}>
+                <Phone /> Call {phoneNumber}
               </a>
-              <a className={buttonVariants({ variant: "outline", size: "lg", className: "h-14 border-surface-strong-foreground/30 bg-surface-strong/40 px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground" })} href="#services">
-                Explore services
+              <a className={buttonVariants({ variant: "outline", size: "lg", className: "h-14 border-surface-strong-foreground/30 bg-surface-strong/40 px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
+                View Google Business Profile <ArrowRight />
               </a>
             </div>
           </div>
@@ -262,14 +273,25 @@ function Index() {
       </section>
 
       <section id="contact" className="border-b-8 border-primary bg-accent py-18 sm:py-22">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-5 py-16 lg:flex-row lg:items-center lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-5 py-16 lg:flex-row lg:items-center lg:px-8">
           <div>
             <p className="text-sm font-extrabold uppercase text-accent-foreground/65">Need truck or trailer repair?</p>
             <h2 className="mt-2 text-5xl font-extrabold uppercase leading-none text-accent-foreground sm:text-6xl">Let’s get you moving.</h2>
+            <a
+              href={phoneHref}
+              className="mt-7 inline-flex items-center gap-3 text-3xl font-extrabold uppercase text-accent-foreground underline decoration-2 underline-offset-8 transition-opacity hover:opacity-80 sm:text-4xl"
+            >
+              <Phone className="size-7" /> {phoneNumber}
+            </a>
           </div>
-          <a className={buttonVariants({ size: "lg", className: "h-14 bg-surface-strong px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong/90" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
-            Contact us on Google <ArrowRight />
-          </a>
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:flex-col">
+            <a className={buttonVariants({ size: "lg", className: "h-14 bg-surface-strong px-7 text-base font-bold text-surface-strong-foreground hover:bg-surface-strong/90" })} href={phoneHref}>
+              <Phone /> Call now
+            </a>
+            <a className={buttonVariants({ variant: "outline", size: "lg", className: "h-14 border-accent-foreground/30 bg-transparent px-7 text-base font-bold text-accent-foreground hover:bg-accent-foreground/10" })} href={googleBusinessUrl} target="_blank" rel="noreferrer">
+              Contact us on Google <ArrowRight />
+            </a>
+          </div>
         </div>
       </section>
 
@@ -277,11 +299,27 @@ function Index() {
         <div className="mx-auto flex max-w-7xl flex-col gap-7 px-5 sm:flex-row sm:items-end sm:justify-between lg:px-8">
           <div><Brand /><p className="mt-5 max-w-md text-sm leading-relaxed text-surface-strong-foreground/55">Truck and trailer repair serving Dayton, Ohio and the surrounding area.</p></div>
           <div className="text-sm text-surface-strong-foreground/50 sm:text-right">
-            <p>Dayton, Ohio</p>
+            <a href={phoneHref} className="inline-flex items-center gap-2 text-lg font-extrabold text-surface-strong-foreground transition-colors hover:text-accent sm:justify-end">
+              <Phone className="size-4 text-accent" /> {phoneNumber}
+            </a>
+            <p className="mt-3">
+              <a href={googleBusinessUrl} target="_blank" rel="noreferrer" className="font-semibold underline decoration-surface-strong-foreground/30 underline-offset-4 transition-colors hover:text-accent">
+                Dayton Truck &amp; Trailer Repair LLC on Google
+              </a>
+            </p>
+            <p className="mt-3">Dayton, Ohio</p>
             <p className="mt-1">© {new Date().getFullYear()} Dayton Truck & Trailer Repair LLC</p>
           </div>
         </div>
       </footer>
+      <div className="fixed inset-x-0 bottom-0 z-40 flex gap-3 border-t border-surface-strong-foreground/20 bg-surface-strong/95 px-4 py-3 backdrop-blur-md lg:hidden">
+        <a href={phoneHref} className={buttonVariants({ className: "h-12 flex-1 text-sm font-bold" })}>
+          <Phone /> Call now
+        </a>
+        <a href={googleBusinessUrl} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outline", className: "h-12 flex-1 border-surface-strong-foreground/30 bg-transparent text-sm font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground" })}>
+          <MapPin /> Google profile
+        </a>
+      </div>
     </main>
   );
 }
