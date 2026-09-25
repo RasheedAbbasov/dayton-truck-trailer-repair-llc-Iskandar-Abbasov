@@ -34,7 +34,7 @@ function ServicesPage() {
         </p>
       </PageHero>
       <section className="py-20">
-        <div className="mx-auto grid max-w-7xl gap-px bg-border px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const Icon = s.icon;
             return (
@@ -54,7 +54,7 @@ function ServicesPage() {
               </Link>
             );
           })}
-        </div>
+        </div></div>
       </section>
       <SiteFooter />
     </main>
