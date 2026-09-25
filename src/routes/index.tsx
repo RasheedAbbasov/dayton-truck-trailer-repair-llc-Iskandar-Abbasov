@@ -1,27 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  BadgeCheck,
-  CircleGauge,
-  Clock3,
-  MapPin,
-  Menu,
-  Phone,
-  ShieldCheck,
-  Truck,
-  Wrench,
-  X,
-  Zap,
-} from "lucide-react";
-import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, BadgeCheck, Clock3, MapPin, Phone, Wrench, Zap } from "lucide-react";
 
 import heroImage from "@/assets/dayton-truck-repair-hero.jpg";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { googleBusinessUrl, phoneHref, phoneNumber, services, siteUrl as baseUrl } from "@/lib/site";
 
-const siteUrl = "https://daytontruckrepairs.com/";
-const googleBusinessUrl = "https://maps.app.goo.gl/p344iVU7Mk7Krrtx7";
-const phoneNumber = "(904) 240-7895";
-const phoneHref = "tel:+19042407895";
+const siteUrl = `${baseUrl}/`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -83,97 +68,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const services = [
-  {
-    icon: Truck,
-    number: "01",
-    title: "Truck Repair",
-    copy: "Practical repair support for commercial trucks, focused on getting your equipment road-ready.",
-  },
-  {
-    icon: Wrench,
-    number: "02",
-    title: "Trailer Repair",
-    copy: "Dependable service for trailers and the working systems that keep your load moving safely.",
-  },
-  {
-    icon: CircleGauge,
-    number: "03",
-    title: "Issue Diagnosis",
-    copy: "Clear troubleshooting to identify the problem and help you plan the right next step.",
-  },
-  {
-    icon: ShieldCheck,
-    number: "04",
-    title: "Fleet Support",
-    copy: "Responsive repair help for local operators and businesses managing commercial equipment.",
-  },
-];
-
-function Brand() {
-  return (
-    <a href="#top" className="flex min-w-0 items-center gap-3" aria-label="Dayton Truck and Trailer Repair home">
-      <span className="grid size-10 shrink-0 place-items-center bg-primary text-primary-foreground">
-        <Truck className="size-6" strokeWidth={2.5} />
-      </span>
-      <span className="min-w-0 font-display text-xl font-extrabold uppercase leading-none text-surface-strong-foreground sm:text-2xl">
-        Dayton <span className="text-accent">Truck & Trailer</span>
-        <span className="mt-0.5 block text-[0.64rem] font-semibold leading-none text-surface-strong-foreground/65">
-          Repair LLC
-        </span>
-      </span>
-    </a>
-  );
-}
-
 function Index() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
     <main id="top" className="min-h-screen bg-background pb-20 lg:pb-0">
-      <header className="absolute inset-x-0 top-0 z-30 border-b border-surface-strong-foreground/15 bg-surface-strong/90 backdrop-blur-md">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <Brand />
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
-            <a href="#services" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Services</a>
-            <a href="#why-us" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Why us</a>
-            <a href="#contact" className="text-sm font-semibold text-surface-strong-foreground/75 transition-colors hover:text-accent">Contact</a>
-            <a
-              href={phoneHref}
-              className="flex items-center gap-2 text-sm font-bold text-surface-strong-foreground transition-colors hover:text-accent"
-            >
-              <Phone className="size-4 text-accent" /> {phoneNumber}
-            </a>
-            <a
-              className={buttonVariants({ size: "lg" })}
-              href={googleBusinessUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Find us on Google <ArrowRight />
-            </a>
-          </nav>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-accent md:hidden"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? <X /> : <Menu />}
-          </Button>
-        </div>
-        {menuOpen && (
-          <nav className="border-t border-surface-strong-foreground/15 bg-surface-strong px-5 py-5 md:hidden" aria-label="Mobile navigation">
-            <div className="mx-auto flex max-w-7xl flex-col gap-4">
-              <a href="#services" onClick={() => setMenuOpen(false)} className="font-semibold text-surface-strong-foreground">Services</a>
-              <a href="#why-us" onClick={() => setMenuOpen(false)} className="font-semibold text-surface-strong-foreground">Why us</a>
-              <a href="#contact" onClick={() => setMenuOpen(false)} className="font-semibold text-surface-strong-foreground">Contact</a>
-            </div>
-          </nav>
-        )}
-      </header>
+      <SiteHeader />
 
       <section className="relative flex min-h-[92vh] items-end overflow-hidden pt-20">
         <img
@@ -228,19 +126,21 @@ function Index() {
               Dayton Truck & Trailer Repair LLC is ready to hear what is happening and help you move forward.
             </p>
           </div>
-          <div className="mt-14 grid border-y border-border md:grid-cols-2 lg:grid-cols-4">
-            {services.map((service) => {
+          <div className="mt-14 grid gap-px border-y border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, i) => {
               const Icon = service.icon;
               return (
-                <article key={service.title} className="group relative border-b border-border px-6 py-9 last:border-b-0 md:border-r md:[&:nth-child(2)]:border-r-0 lg:border-b-0 lg:[&:nth-child(2)]:border-r lg:last:border-r-0">
-                  <span className="absolute right-5 top-5 font-display text-4xl font-extrabold text-muted/80">{service.number}</span>
+                <Link key={service.slug} to="/services/$slug" params={{ slug: service.slug }} className="group relative bg-background px-6 py-9 transition-colors hover:bg-muted/50">
+                  <span className="absolute right-5 top-5 font-display text-4xl font-extrabold text-muted/80">{String(i + 1).padStart(2, "0")}</span>
                   <Icon className="size-9 text-primary transition-transform duration-300 group-hover:-translate-y-1" strokeWidth={1.8} />
                   <h3 className="mt-8 text-2xl font-bold uppercase">{service.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{service.copy}</p>
-                </article>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{service.short}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold uppercase text-primary">Learn more <ArrowRight className="size-4" /></span>
+                </Link>
               );
             })}
           </div>
+          <Link to="/services" className={buttonVariants({ size: "lg", className: "mt-10 h-12 px-6 font-bold" })}>View all services <ArrowRight /></Link>
         </div>
       </section>
 
@@ -295,31 +195,7 @@ function Index() {
         </div>
       </section>
 
-      <footer className="bg-surface-strong py-10 text-surface-strong-foreground">
-        <div className="mx-auto flex max-w-7xl flex-col gap-7 px-5 sm:flex-row sm:items-end sm:justify-between lg:px-8">
-          <div><Brand /><p className="mt-5 max-w-md text-sm leading-relaxed text-surface-strong-foreground/55">Truck and trailer repair serving Dayton, Ohio and the surrounding area.</p></div>
-          <div className="text-sm text-surface-strong-foreground/50 sm:text-right">
-            <a href={phoneHref} className="inline-flex items-center gap-2 text-lg font-extrabold text-surface-strong-foreground transition-colors hover:text-accent sm:justify-end">
-              <Phone className="size-4 text-accent" /> {phoneNumber}
-            </a>
-            <p className="mt-3">
-              <a href={googleBusinessUrl} target="_blank" rel="noreferrer" className="font-semibold underline decoration-surface-strong-foreground/30 underline-offset-4 transition-colors hover:text-accent">
-                Dayton Truck &amp; Trailer Repair LLC on Google
-              </a>
-            </p>
-            <p className="mt-3">Dayton, Ohio</p>
-            <p className="mt-1">© {new Date().getFullYear()} Dayton Truck & Trailer Repair LLC</p>
-          </div>
-        </div>
-      </footer>
-      <div className="fixed inset-x-0 bottom-0 z-40 flex gap-3 border-t border-surface-strong-foreground/20 bg-surface-strong/95 px-4 py-3 backdrop-blur-md lg:hidden">
-        <a href={phoneHref} className={buttonVariants({ className: "h-12 flex-1 text-sm font-bold" })}>
-          <Phone /> Call now
-        </a>
-        <a href={googleBusinessUrl} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outline", className: "h-12 flex-1 border-surface-strong-foreground/30 bg-transparent text-sm font-bold text-surface-strong-foreground hover:bg-surface-strong-foreground/10 hover:text-surface-strong-foreground" })}>
-          <MapPin /> Google profile
-        </a>
-      </div>
+      <SiteFooter />
     </main>
   );
 }
