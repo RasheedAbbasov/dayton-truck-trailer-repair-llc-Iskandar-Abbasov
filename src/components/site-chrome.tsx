@@ -32,6 +32,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Brand />
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+          <Link to="/" activeOptions={{ exact: true }} className={navClass} activeProps={{ className: "text-accent" }}>Home</Link>
           <Link to="/services" className={navClass} activeProps={{ className: "text-accent" }}>Services</Link>
           <Link to="/" hash="why-us" className={navClass}>Why us</Link>
           <Link to="/" hash="contact" className={navClass}>Contact</Link>
@@ -56,6 +57,7 @@ export function SiteHeader() {
       {menuOpen && (
         <nav className="border-t border-surface-strong-foreground/15 bg-surface-strong px-5 py-5 md:hidden" aria-label="Mobile navigation">
           <div className="mx-auto flex max-w-7xl flex-col gap-4">
+            <Link to="/" onClick={close} className="font-semibold text-surface-strong-foreground">Home</Link>
             <Link to="/services" onClick={close} className="font-semibold text-surface-strong-foreground">Services</Link>
             <Link to="/" hash="why-us" onClick={close} className="font-semibold text-surface-strong-foreground">Why us</Link>
             <Link to="/" hash="contact" onClick={close} className="font-semibold text-surface-strong-foreground">Contact</Link>
